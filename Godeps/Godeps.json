@@ -1,0 +1,35 @@
+{
+	"ImportPath": "github.com/jetlwx/zabbixAlert",
+	"GoVersion": "go1.10",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.3.0-66-gceae19c",
+			"Rev": "ceae19ce1c5ac766abad8db04d649a7a83e91ced"
+		},
+		{
+			"ImportPath": "github.com/go-xorm/builder",
+			"Comment": "v0.2.0",
+			"Rev": "bad0a612f0d6277b953910822ab5dfb30dd18237"
+		},
+		{
+			"ImportPath": "github.com/go-xorm/core",
+			"Comment": "v0.6.0",
+			"Rev": "c10e21e7e1cec20e09398f2dfae385e58c8df555"
+		},
+		{
+			"ImportPath": "github.com/go-xorm/xorm",
+			"Comment": "v0.7.0-1-gab17aa2",
+			"Rev": "ab17aa22037beed8b99422a95d8a9419066caf7c"
+		},
+		{
+			"ImportPath": "github.com/jetlwx/comm/httplib",
+			"Rev": "89f61b472205868a1839aeed6af840e56a33a501"
+		},
+		{
+			"ImportPath": "github.com/jetlwx/comm/weixinAPI",
+			"Rev": "89f61b472205868a1839aeed6af840e56a33a501"
+		}
+	]
+}
