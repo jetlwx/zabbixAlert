@@ -29,12 +29,17 @@ type Alerts struct {
 	Message string
 }
 
+type AlertTriggers struct {
+	Triggerid   int64
+	Description string
+}
+
 //得取最近３个月未恢复指定级别的触发器ＩＤ
 //0-未分类，1-信息，2-警告，3-一般严重，4-严重。5-灾难）
-func NoRecoverTriggersID(priority int) (t []int64) {
+func NoRecoverTriggersID(priority int) (t []AlertTriggers) {
 	t1 := strconv.FormatInt(time.Now().Unix()-int64(90*24*36000), 10)
 
-	sqlstr := "select triggerid from triggers  where priority=" + strconv.Itoa(priority) + " and  status=0 AND value=1 and lastchange>" + t1
+	sqlstr := "select triggerid,description from triggers  where priority=" + strconv.Itoa(priority) + " and  status=0 AND value=1 and lastchange>" + t1
 	if err := Engine.Sql(sqlstr).Find(&t); err != nil {
 		log.Println("error at function NoRecoverTriggersID", err)
 		return
@@ -110,7 +115,7 @@ func GetHostStatus(itemid int64) (status int) {
 
 //若 items status 状态为0 ，则找到对应events的EVNETSID，
 func GetEventsID(triggerid int64) (eid int64) {
-	sqlstr := "select eventid from  events where objectid=" + strconv.FormatInt(triggerid, 10) + " and acknowledged <>1 order by eventid desc limit 1"
+	sqlstr := "select eventid  from  events where objectid=" + strconv.FormatInt(triggerid, 10) + " and acknowledged <>1 order by eventid desc limit 1"
 	has, err := Engine.Sql(sqlstr).Get(&eid)
 	if err != nil {
 		log.Println("error at function GetEventsID", err)

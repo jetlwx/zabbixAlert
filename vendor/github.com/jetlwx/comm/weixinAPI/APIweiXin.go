@@ -90,7 +90,7 @@ func token(w *CorpInfo) (string, error) {
 		log.Println("error at function token", err)
 		return "", err
 	}
-	//log.Println("res=", res)
+	//log.Println("res=", string(res))
 
 	t := tokenInfo{}
 	if err := json.Unmarshal(res, &t); err != nil {

@@ -18,7 +18,7 @@ func Action(priority int) {
 		//get items monitor status,if status is 1(diabled) then  continues
 
 		//if status is 0 ,mean enable;
-		itemid := GetItemIdByTriggerID(tr)
+		itemid := GetItemIdByTriggerID(tr.Triggerid)
 		if itemid == 0 {
 			continue
 		}
@@ -33,13 +33,17 @@ func Action(priority int) {
 			continue
 		}
 
-		eid := GetEventsID(tr)
+		eid := GetEventsID(tr.Triggerid)
 		if eid == 0 {
 			continue
 		}
 		aler := GetAlerts(eid)
+		//不知道为什么有的报警有事件，但未在alert表中形成记录，所以直接推出
 		if len(aler) == 0 {
-			continue
+			t0 := time.Now().Format("2006-01-02 15:04:05")
+			msg += tr.Description + "\n"
+			msg += "推送时间:" + t0 + "\n"
+			msg += "-----------------------" + "\n"
 		}
 		for _, a := range aler {
 			if a.Subject == "" && a.Message == "" {
